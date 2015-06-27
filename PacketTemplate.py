@@ -72,21 +72,6 @@ target-id: %s\r\n\r\n%s' % (str(len(stringg)), str(intt), stringg )
         rawPacket = packet.encode('utf-8')
         return rawPacket
     '''
-
-
-    def MESGPACK(intt, stringg):
-        packet = ''.join(
-        ["MESG\r\n", 
-        "Content-length: %s\r\n" % (str(len(stringg))),
-        "content-type: image/jpeghtml\r\n",
-        "last: 1\r\n",
-        "mesg-id: 666\r\n",
-        "Timestamp: 1402632927.955511",
-        "mesg-target: 1\r\n",
-        "target-id: %s\r\n\r\n%s"]) % (str(intt), stringg )
-        rawPacket = packet.encode('utf-8')
-        return rawPacket
-    
     def GROUPMESG(intt, stringg):
         packet = ''.join(
         ["MESG\r\n", 

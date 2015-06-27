@@ -1,10 +1,16 @@
+'''
+Palringo Python Bot Developed by Ariel Saldana (Palringo ID 2015666)
+'''
+
 #!/usr/bin/python3.4
-##from PIL import Image
+#from PIL import Image PIL IMAGE
 import io
+#import speex
 import sys
 import socket
 import threading
 from PacketTemplate import *
+from Salsa20 import *
 import Parser
 import time
 import datetime
@@ -17,21 +23,17 @@ def clock():
         parser = Parser.Parser()
         print("test working")
         try:
-            #parser.sendMessage(4154538, str(datetime.datetime.now()))
-            parser.sendMessage(10634115, "!typing")
+            parser.sendGroupMessage(4154538, str(datetime.datetime.now()))
         except:
             pass
         time.sleep(10)
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    htmlsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_address = ('80.69.129.117', 8080);
-
+    server_address = ('80.69.129.4',12345);
     print('Attempting to connect to the server')
     try:
         sock.connect(server_address)
-        #htmlsock.connect(htmlserver_address)
     except:
         raise Exception('Error Connecting to the server')
 
@@ -41,19 +43,19 @@ def main():
     try:
         parser = Parser.Parser()
         parser.bind(sock, False)
-        ##LOGON INFORMATION HERE ===================================
-        parser.sendLogon('email@domain.ltd')
+        parser.sendLogon('bot-email@bot.com')
         passwd = "password"
-        ## ---------------------------------------------------------
 
         amount_received = 0
 
         while True:
             data = sock.recv(65535)
-            #print(data)
             thr = threading.Thread(group=None, target=parser.ParsePacket, name=None, args=[(data)])
             ## pass our socket object to the parser class
+            ## parse our data
+            #parser.ParsePacket(data)
             thr.start()
+            #e = speex.Encoder()
             #thr.is_alive() # will return whether foo is running currently
             #thr.join() # will wait till "foo" is donedef foo():
 
@@ -61,33 +63,51 @@ def main():
                 break
         
             else:
-                ## GROUP MESSAGES
                 if ( parser.getCommand() == 'GroupMESG'):
                     
-                    ## if someone talks
-                    #if ( parser.getSourceID() != 0 ):
-                    #    parser.sendGroupMessage(parser.getTargetID(), "hello")
-                    #parser.sendGroupMessage(parser.getTargetID(), "shut up")
+                    '''
+                    s = ''.join(
+                        ["MESG\r\n",
+                         "Content-length: %s\r\n" % (str(len(parser.getPayload()))),
+                         "Content-type: image/jpeghtml\r\n",
+                         "mesg-id: 666\r\n",
+                         "mesg-target: 1\r\n",
+                         "target-id: %s\r\n\r\n%s"]) % (str(parser.getTargetID()), parser.getPayload())
+                    rawPacket = s.encode('raw-unicode-escape')
 
-                    #typing bot cheat
+                    sock.sendall(rawPacket)
+                    '''
+                        
+
+
+                    
+                    
+                    if (parser.getPayload().lower() == 'about'):
+                        parser.sendGroupMessage(parser.getTargetID(), 'to download this bot\'s source code to go: http://ahhriel.com/blog/2015/03/15/Palringo-python-bot/')
+
+                    if ("lol" in parser.getPayload().lower()):
+                        parser.sendGroupMessage(parser.getTargetID(), 'stop laughing bitch nigga')
+                        
+                    
+                    ## if jesse talks
+                    #if ( parser.getSourceID() == 4604623 ):
+                        #print("Jesse")
+                   
                     m = re.search('<p class="dictionary_word">(.*?)</p>', parser.getPayload())
                     l = re.search('    (.*?)    ', parser.getPayload())
                     if m:
                         parser.sendGroupMessage(parser.getTargetID(), m.group(1))
                     if l:
                         parser.sendGroupMessage(parser.getTargetID(), l.group(1))
+                        
 
-  
 
-                #private message
                 elif ( parser.getCommand() == 'PrivMESG'):
                     parser.sendPrivateMessage(parser.getSourceID(), "Do NOT message me here!")
                     
-                #logon auth command
                 elif (parser.getCommand() == 'AUTH'):
-                    print("auth requested")
                     parser.sendAuth(passwd)
-                #ping - pong response 
+
                 elif ( parser.getCommand() == 'P'):
                     parser.sendPing()
              
