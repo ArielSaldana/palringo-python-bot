@@ -3,6 +3,18 @@ Palringo Python Bot Developed by Ariel Saldana (Palringo ID 2015666)
 '''
 
 #!/usr/bin/python3.4
+
+__author__ = "Ariel Saldana"
+__copyright__ = "Copyright 2015, An Ariel / Unreal Project"
+__credits__ = ["Ariel Saldana"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Ariel Saldana"
+__email__ = "ariel@unreal.io"
+__status__ = "Production"
+
+
+
 #from PIL import Image PIL IMAGE
 import io
 #import speex
@@ -23,10 +35,10 @@ def clock():
         parser = Parser.Parser()
         print("test working")
         try:
-            parser.sendGroupMessage(4154538, str(datetime.datetime.now()))
+            parser.sendGroupMessage(47, '!typing')
         except:
             pass
-        time.sleep(10)
+        time.sleep(4)
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -38,12 +50,12 @@ def main():
         raise Exception('Error Connecting to the server')
 
     print('Connected succesfully')
-    #thr2 = threading.Thread(target=clock)
-    #thr2.start()
+    #typingBotThread = threading.Thread(target=clock)
+    #typingBotThread.start()
     try:
         parser = Parser.Parser()
         parser.bind(sock, False)
-        parser.sendLogon('bot-email@bot.com')
+        parser.sendLogon('email@domain.ltd')
         passwd = "password"
 
         amount_received = 0
