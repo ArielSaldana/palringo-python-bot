@@ -2,7 +2,7 @@ class packets:
 
     def LOGON(email):
         packet = 'LOGON\r\n'
-        packet += 'Client-ID: Kryis-Bot\r\n'
+        ##packet += 'Client-ID: unr-Bot\r\n'
         ##packet += 'Operator: OSX_CLIENT\r\n'
         ##packet += 'app-type: Apple/Intel\r\n'
         packet += 'Operator: SERVER\r\n'
