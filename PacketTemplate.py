@@ -167,5 +167,67 @@ target-id: %s\r\n\r\n%s' % (str(len(stringg)), str(intt), stringg )
         #packet += data
         test += data
         return test
+        
+    #admin actions
+    
+    def adminUser(groupId, targetId):
+        packet = 'GROUP ADMIN\r\n'
+        packet += 'group-id: ' + str(groupId) + '\r\n'
+        packet += 'target-id: ' + str(targetId) + '\r\n'
+        packet += 'last: 1\r\n'
+        packet += 'mesg-id: 666\r\n'
+        packet += 'action: 1\r\n'
+        packet += '\r\n'
+        return packet
+        
+    def modUser(groupId, targetId):
+        packet = 'GROUP ADMIN\r\n'
+        packet += 'group-id: ' + str(groupId) + '\r\n'
+        packet += 'target-id: ' + str(targetId) + '\r\n'
+        packet += 'last: 1\r\n'
+        packet += 'mesg-id: 666\r\n'
+        packet += 'action: 2\r\n'
+        packet += '\r\n'
+        return packet
+        
+    def silenceUser(groupId, targetId):
+        packet = 'GROUP ADMIN\r\n'
+        packet += 'group-id: ' + str(groupId) + '\r\n'
+        packet += 'target-id: ' + str(targetId) + '\r\n'
+        packet += 'last: 1\r\n'
+        packet += 'mesg-id: 666\r\n'
+        packet += 'action: 8\r\n'
+        packet += '\r\n'
+        return packet
+        
+    def kickUser(groupId, targetId):
+        packet = 'GROUP ADMIN\r\n'
+        packet += 'group-id: ' + str(groupId) + '\r\n'
+        packet += 'target-id: ' + str(targetId) + '\r\n'
+        packet += 'last: 1\r\n'
+        packet += 'mesg-id: 666\r\n'
+        packet += 'action: 16\r\n'
+        packet += '\r\n'
+        return packet
+        
+    def banUser(groupId, targetId):
+        packet = 'GROUP ADMIN\r\n'
+        packet += 'group-id: ' + str(groupId) + '\r\n'
+        packet += 'target-id: ' + str(targetId) + '\r\n'
+        packet += 'last: 1\r\n'
+        packet += 'mesg-id: 666\r\n'
+        packet += 'action: 4\r\n'
+        packet += '\r\n'
+        return packet
+        
+    def resetUser(groupId, targetId):
+        packet = 'GROUP ADMIN\r\n'
+        packet += 'group-id: ' + str(groupId) + '\r\n'
+        packet += 'target-id: ' + str(targetId) + '\r\n'
+        packet += 'last: 1\r\n'
+        packet += 'mesg-id: 666\r\n'
+        packet += 'action: 0\r\n'
+        packet += '\r\n'
+        return packet
 
 
